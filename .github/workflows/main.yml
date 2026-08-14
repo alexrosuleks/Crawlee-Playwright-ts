@@ -1,0 +1,22 @@
+# Requires one repository secret:
+#   BUILD_ACTOR_URL — full “Build trigger URL” from Scrapely (Actor → Settings → Continuous integration).
+#     It already includes the API token and version; the server pulls latest Git when this URL is POSTed.
+
+name: Test and build latest version
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Trigger Scrapely build
+        run: curl -fsS -X POST "$BUILD_ACTOR_URL"
+        env:
+          BUILD_ACTOR_URL: ${{ secrets.BUILD_ACTOR_URL }}
