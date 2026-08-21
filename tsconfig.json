@@ -1,5 +1,5 @@
 {
-    "extends": "@scrapely/tsconfig",
+    "extends": "@apify/tsconfig",
     "compilerOptions": {
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
